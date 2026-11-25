@@ -1,0 +1,28 @@
+{
+  "keyboards": [
+    { "id": "aula-f75", "name": "Aula F75", "size": "75%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": false },
+    { "id": "redragon-k552", "name": "Redragon K552", "size": "TKL", "layout": "ANSI", "socket": "3-pin solder", "low": false },
+    { "id": "wooting-60he", "name": "Wooting 60HE", "size": "60%", "layout": "ANSI", "socket": "magnetic", "low": false },
+    { "id": "nuphy-air75", "name": "NuPhy Air75 V2", "size": "75%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": true }
+  ],
+  "keycaps": [
+    { "id": "sa", "name": "SA", "height": 16.5, "kind": "standard" },
+    { "id": "taihao", "name": "Tai Hao", "height": 14.8, "kind": "standard" },
+    { "id": "kat", "name": "KAT", "height": 13.5, "kind": "standard" },
+    { "id": "oem", "name": "OEM", "height": 11.9, "kind": "standard" },
+    { "id": "cherry", "name": "Cherry", "height": 9.4, "kind": "standard" },
+    { "id": "xda", "name": "XDA", "height": 9.1, "kind": "standard" },
+    { "id": "kam", "name": "KAM", "height": 9.1, "kind": "standard" },
+    { "id": "dsa", "name": "DSA", "height": 7.6, "kind": "standard" },
+    { "id": "g20", "name": "G20", "height": 7.1, "kind": "standard" },
+    { "id": "tea", "name": "TEA", "height": 3.8, "kind": "low" },
+    { "id": "mbk", "name": "MBK", "height": 3.2, "kind": "low" },
+    { "id": "apple", "name": "Apple Magic Keyboard", "height": 2.3, "kind": "scissor" }
+  ],
+  "switches": [
+    { "id": "milky", "name": "Gateron Milky Yellow Pro", "type": "Linear", "pins": 5, "kind": "mx" },
+    { "id": "outemu", "name": "Outemu Blue", "type": "Clicky", "pins": 3, "kind": "mx" },
+    { "id": "jade", "name": "Gateron Magnetic Jade", "type": "Linear", "pins": 5, "kind": "magnetic" },
+    { "id": "lp2", "name": "Gateron LP 2.0", "type": "Linear", "pins": 5, "kind": "low" }
+  ]
+}
