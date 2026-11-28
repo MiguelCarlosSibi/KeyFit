@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Auth from './components/Auth.jsx'
+import Builder from './components/Builder.jsx'
 
 // custom hook: state that survives a refresh
 function useStored(key, initial) {
@@ -20,6 +21,7 @@ const tabs = [
 export default function App() {
   const [users, setUsers] = useStored('keyfit-users', [])
   const [email, setEmail] = useStored('keyfit-session', null)
+  const [boards, setBoards] = useStored('keyfit-boards', [])
   const [catalog, setCatalog] = useState(null)
   const [loadError, setLoadError] = useState('')
   const [page, setPage] = useState('dashboard')
@@ -50,6 +52,13 @@ export default function App() {
   if (loadError) return <p className="p-8 text-[#d09a8e]">{loadError}</p>
   if (!catalog) return <p className="p-8 text-[#9a968c]">Loading parts...</p>
 
+  const mine = boards.filter((b) => b.owner === email)
+
+  function saveBoard(board) {
+    setBoards([...boards, { ...board, id: crypto.randomUUID(), owner: email }])
+    setPage('saved')
+  }
+
   return (
     <div className="min-h-screen bg-[#1f2022] text-[#e8e4dc]">
       <header className="flex items-center justify-between border-b border-[#3a3d41] px-8 py-4">
@@ -64,7 +73,7 @@ export default function App() {
                 page === id ? 'bg-[#8fa58a] text-[#1f2022]' : 'text-[#9a968c] hover:text-[#e8e4dc]'
               }`}
             >
-              {text}
+              {text}{id === 'saved' ? ` (${mine.length})` : ''}
             </button>
           ))}
         </nav>
@@ -74,10 +83,11 @@ export default function App() {
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-8 py-10">
-        <p className="text-[#9a968c]">
-          {page} page. Loaded {catalog.keyboards.length} keyboards, {catalog.keycaps.length} keycap profiles and{' '}
-          {catalog.switches.length} switches.
-        </p>
+        {page === 'builder' ? (
+          <Builder catalog={catalog} onSave={saveBoard} />
+        ) : (
+          <p className="text-[#9a968c]">{page} page. This screen comes in the next step.</p>
+        )}
       </main>
     </div>
   )

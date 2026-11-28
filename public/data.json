@@ -3,7 +3,8 @@
     { "id": "aula-f75", "name": "Aula F75", "size": "75%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": false },
     { "id": "redragon-k552", "name": "Redragon K552", "size": "TKL", "layout": "ANSI", "socket": "3-pin solder", "low": false },
     { "id": "wooting-60he", "name": "Wooting 60HE", "size": "60%", "layout": "ANSI", "socket": "magnetic", "low": false },
-    { "id": "nuphy-air75", "name": "NuPhy Air75 V2", "size": "75%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": true }
+    { "id": "nuphy-air75", "name": "NuPhy Air75 V2", "size": "75%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": true },
+    { "id": "keychron-q2", "name": "Keychron Q2", "size": "65%", "layout": "ANSI", "socket": "5-pin hot-swap", "low": false }
   ],
   "keycaps": [
     { "id": "sa", "name": "SA", "height": 16.5, "kind": "standard" },

@@ -71,9 +71,17 @@ export default function Auth({ users, onLogin, onSignUp }) {
         {signUp && field('confirm', 'Confirm password', 'password')}
         {error && <p className="text-sm text-[#d09a8e]">{error}</p>}
         <button type="submit" className={btn}>{signUp ? 'Create account' : 'Log in'}</button>
-        <button type="button" onClick={() => { setSignUp(!signUp); setError('') }} className="cursor-pointer text-sm text-[#a8bca3] underline">
-          {signUp ? 'Already have an account? Log in' : 'New here? Create an account'}
-        </button>
+        <button
+  type="button"
+  onClick={() => {
+    setSignUp(!signUp)
+    setForm(empty)
+    setError('')
+  }}
+  className="cursor-pointer text-sm text-[#a8bca3] underline"
+>
+  {signUp ? 'Already have an account? Log in' : 'New here? Create an account'}
+</button>
       </form>
     </div>
   )
