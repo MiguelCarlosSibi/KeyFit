@@ -1,4 +1,14 @@
 import { useState, useEffect } from 'react'
+import Auth from './components/Auth.jsx'
+
+// custom hook: state that survives a refresh
+function useStored(key, initial) {
+  const [value, setValue] = useState(() => JSON.parse(localStorage.getItem(key)) ?? initial)
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+  return [value, setValue]
+}
 
 const tabs = [
   ['dashboard', 'Dashboard'],
@@ -8,6 +18,8 @@ const tabs = [
 ]
 
 export default function App() {
+  const [users, setUsers] = useStored('keyfit-users', [])
+  const [email, setEmail] = useStored('keyfit-session', null)
   const [catalog, setCatalog] = useState(null)
   const [loadError, setLoadError] = useState('')
   const [page, setPage] = useState('dashboard')
@@ -22,6 +34,19 @@ export default function App() {
       .catch((err) => setLoadError(err.message))
   }, [])
 
+  const user = users.find((u) => u.email === email)
+  if (!user) {
+    return (
+      <Auth
+        users={users}
+        onLogin={setEmail}
+        onSignUp={(u) => {
+          setUsers([...users, u])
+          setEmail(u.email)
+        }}
+      />
+    )
+  }
   if (loadError) return <p className="p-8 text-[#d09a8e]">{loadError}</p>
   if (!catalog) return <p className="p-8 text-[#9a968c]">Loading parts...</p>
 
@@ -43,6 +68,10 @@ export default function App() {
             </button>
           ))}
         </nav>
+        <div className="flex items-center gap-3 text-sm text-[#9a968c]">
+          <span>{user.fullName}</span>
+          <button type="button" onClick={() => setEmail(null)} className="cursor-pointer underline">Log out</button>
+        </div>
       </header>
       <main className="mx-auto max-w-5xl px-8 py-10">
         <p className="text-[#9a968c]">
