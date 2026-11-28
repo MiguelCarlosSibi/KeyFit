@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Auth from './components/Auth.jsx'
 import Builder from './components/Builder.jsx'
+import { Dashboard, Saved, Account } from './components/Views.jsx'
 
 // custom hook: state that survives a refresh
 function useStored(key, initial) {
@@ -55,9 +56,17 @@ export default function App() {
   const mine = boards.filter((b) => b.owner === email)
 
   function saveBoard(board) {
-    setBoards([...boards, { ...board, id: crypto.randomUUID(), owner: email }])
-    setPage('saved')
-  }
+  setBoards([...boards, { ...board, id: crypto.randomUUID(), owner: email }])
+  setPage('saved')
+}
+
+function deleteBoard(id) {
+  setBoards(boards.filter((b) => b.id !== id))
+}
+
+function updateUser(changes) {
+  setUsers(users.map((u) => (u.email === email ? { ...u, ...changes } : u)))
+}
 
   return (
     <div className="min-h-screen bg-[#1f2022] text-[#e8e4dc]">
@@ -83,12 +92,11 @@ export default function App() {
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-8 py-10">
-        {page === 'builder' ? (
-          <Builder catalog={catalog} onSave={saveBoard} />
-        ) : (
-          <p className="text-[#9a968c]">{page} page. This screen comes in the next step.</p>
-        )}
-      </main>
+  {page === 'dashboard' && <Dashboard user={user} boards={mine} catalog={catalog} go={setPage} />}
+  {page === 'builder' && <Builder catalog={catalog} onSave={saveBoard} />}
+  {page === 'saved' && <Saved boards={mine} catalog={catalog} onDelete={deleteBoard} go={setPage} />}
+  {page === 'account' && <Account user={user} onUpdate={updateUser} onLogout={() => setEmail(null)} />}
+</main>
     </div>
   )
 }
